@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Upload Excel File</h2>
+    <form action="" method="post" enctype="multipart/form-data" id="fileUpload">
+        <label for="file">Choose Excel File:</label>
+        <input type="file" name="file" id="file" accept=".xls, .xlsx, .csv">
+  
+        <button type="submit" name="submit">Upload</button>
+        <p id="uploadErrmsg" style="color:red"></p>
+    </form>
+
+    <div id="result"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+
+        $('#fileUpload').on('submit',function(e){
+            e.preventDefault()
+            var fileInput = $('#file');
+        if (fileInput.get(0).files.length === 0) {
+            $('#uploadErrmsg').html('Please choose a .xls, .xlsx, or .csv file before submitting');
+            return;
+        } else{
+            $('#uploadErrmsg').html('');
+        }
+            var fileName = fileInput.val();
+            var ext = fileName.split('.').pop().toLowerCase();
+            var allowedExtensions = ['xls', 'xlsx', 'csv'];
+
+            if ($.inArray(ext, allowedExtensions) === -1) {
+                $('#uploadErrmsg').html('Please choose .xls, .xlsx, or .csv file only');
+                return;
+            }else{
+                $('#uploadErrmsg').html('');
+            }
+
+            $.ajax({
+                type: 'POST',
+                 url: 'data.php',
+                 data:new FormData(this),
+                 contentType: false,
+                 processData: false,
+                success:function(data){
+                    //  console.log(data);
+
+                     $dataFormation=JSON.parse(data)
+                     console.log($dataFormation[0]);
+
+                    //  $dataValue=JSON.stringify($dataFormation[0][31]);
+                    //   $('#result').html($dataValue);
+
+                    // store the data localstore
+                    var excelRecord=JSON.stringify($dataFormation);
+                    localStorage.setItem('excelData',excelRecord);
+                }
+                });
+
+        })
+
+    </script>
+    
+</body>
+</html>

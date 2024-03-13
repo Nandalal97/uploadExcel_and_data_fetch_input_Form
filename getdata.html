@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="load()">
+
+   <form action="">
+    <div>
+        Agar Agar: <input type="text" name="formdata" id="formdataInput" value="">
+    </div>
+   </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+        function load() {
+            var getExcelData = localStorage.getItem('excelData');
+            var data = JSON.parse(getExcelData);
+            console.log(data[0][31]);
+            $('#formdataInput').val(data[0][31]['E']);
+        }
+    </script>
+    
+</body>
+</html>

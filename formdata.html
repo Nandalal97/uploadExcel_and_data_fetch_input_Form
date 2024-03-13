@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <table>
+            <tr>
+                <td>Agar Agar: </td>
+                <td><input type="text" name="1" id="agarAgar" value=""></td>
+            </tr>
+            <tr>
+                <td>Alga Espaguette: </td>
+                <td><input type="text" name="2" id="2"></td>
+            </tr>
+            <tr>
+                <td>Alga Spirulina: </td>
+                <td><input type="text" name="3" id="AlgaSpirulina"></td>
+            </tr>
+            <tr>
+                <td>Alga Wakame: </td>
+                <td><input type="text" name="4" id="AlgaWakame"></td>
+            </tr>
+            <tr>
+                <td>Almond: </td>
+                <td><input type="text" name="5" id="aloeVera"></td>
+            </tr>
+            <tr>
+                <td>Aloe Vera: </td>
+                <td><input type="text" name="6" id="aloeVera"></td>
+            </tr>
+            <tr>
+                <td>Alpha-Lactalbumin: </td>
+                <td><input type="text" name="7" id="alphaLactalbumin"></td>
+            </tr>
+            <tr>
+                <td>Amaranth: </td>
+                <td><input type="text" name="8" id="Amaranth"></td>
+            </tr>
+            <tr>
+                <td>Anchovy: </td>
+                <td><input type="text" name="9" id="Amaranth"></td>
+            </tr>
+            <tr>
+                <td>Aniseed: </td>
+                <td><input type="text" name="10" id="Amaranth"></td>
+            </tr>
+        </table>
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+         function load() {
+            var getExcelData = localStorage.getItem('excelData');
+            var data = JSON.parse(getExcelData);
+            // $('#agarAgar').val(data[0][31]['E']);
+           // console.log(data[0][31]);
+
+            var mapId = localStorage.getItem('mapId');
+            var mapDetails = JSON.parse(mapId);
+            // var indexNo = mapDetails[0];
+            // var csvId = indexNo.csvId;
+            // var formFildId = indexNo.formFildId;
+
+
+            // console.log(mapDetails.length);
+            //  console.log(indexNo);
+            //  console.log(indexNo.formFildId);
+            //  console.log(indexNo.csvId);
+            // console.log(data[0][31]);
+
+            // $("input[name="+formFildId+"]").val(data[0][csvId]['E']);
+             for(i=0; i < mapDetails.length ; i++){
+                var indexNo = mapDetails[i];
+                var csvId = indexNo.csvId;
+                var formFildId = indexNo.formFildId;
+               $("input[name="+formFildId+"]").val(data[0][csvId]['E']);
+            };
+            
+            }
+        
+            $(document).ready(function() {
+                load();
+            });
+    </script>
+</body>
+</html>
